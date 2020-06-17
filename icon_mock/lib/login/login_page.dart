@@ -65,24 +65,23 @@ class _LoginPageState extends State<LoginPage> {
       child: Stack(
         children: <Widget>[
           ClipPath(
-            clipper: ClippingClass(),
+            clipper: OvalShape(),
             child: Positioned(
               top: -40,
               height: 400,
               width: width,
-              child: FadeAnimation(
-                  1,
+              child: 
                   Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/black_background.jpg'),
                             fit: BoxFit.fill)),
-                  )),
+                  )
             ),
           ),
           Positioned(
             top: 150,
-            left: 20,
+            left: 10,
             height: 300,
             width: width,
             child: FadeAnimation(
@@ -105,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
       2.0,
       Center(
         child: Material(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
           color: Colors.black,
           child: InkWell(
             splashColor: gold,
@@ -113,10 +112,10 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               alignment: Alignment.bottomCenter,
               height: 50,
-              width: MediaQuery.of(context).size.width * .3,
+              width: MediaQuery.of(context).size.width * .5,
               margin: EdgeInsets.symmetric(horizontal: 60),
               decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
               child: Center(
                 child: HebrewText(
                   "המשך",
@@ -132,8 +131,11 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onContinueTap() {
     final phone = _phoneController.text;
+    final sms = _smsController.text;
+
     if (phone.length > 9) {
       setState(() {
+        currentState = 
         opacity = 1.0;
       });
     }
@@ -242,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
       ]);
 }
 
-class ClippingClass extends CustomClipper<Path> {
+class OvalShape extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
