@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // show image select
 // show name
 // 
-class Onboarding extends StatelessWidget {
+class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

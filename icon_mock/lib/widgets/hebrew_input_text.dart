@@ -20,6 +20,7 @@ class HebrewText extends StatelessWidget {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Text(
+          
           text,
           overflow: overflow,
           textAlign: textAlign,

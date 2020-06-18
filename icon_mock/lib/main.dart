@@ -13,13 +13,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Icon',
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
-     
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: LoginPage(),
     );
   }
 }
- 
