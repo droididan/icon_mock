@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icon_mock/login/login_page.dart';
+import 'package:icon_mock/chat/recent_chats_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
+      // home: LoginPage(),
+      home: RecentChatsPage(),
     );
   }
 }

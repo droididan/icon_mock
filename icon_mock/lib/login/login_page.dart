@@ -1,10 +1,10 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icon_mock/animations/fade_animation.dart';
-import 'package:icon_mock/onboarding/onboarding.dart';
+import 'package:icon_mock/onboarding/onboarding_page.dart';
 import 'package:icon_mock/theme.dart';
+import 'package:icon_mock/widgets/big_button.dart';
 import 'package:icon_mock/widgets/focus_aware.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
 import 'package:icon_mock/extensions/size_ext.dart';
@@ -62,13 +62,19 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: _continueButton(context)),
+            _nextButton(),
           ]),
         ),
       ),
     );
+  }
+
+  Align _nextButton() {
+    return Align(
+        alignment: Alignment.bottomCenter,
+        child: BigButton(
+            onTap: () => _onContinueTap(),
+            title: state == LoginState.phone ? "שלח" : 'המשך'));
   }
 
   Widget _phoneTitle() => FadeAnimation(
@@ -121,36 +127,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _continueButton(BuildContext context) => Padding(
-        padding: EdgeInsets.all(16),
-        child: FadeAnimation(
-            2.0,
-            Material(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.black,
-              child: InkWell(
-                splashColor: gold,
-                onTap: () => _onContinueTap(),
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * .5,
-                  margin: EdgeInsets.symmetric(horizontal: 60),
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                  child: Center(
-                    child: HebrewText(
-                      state == LoginState.phone ? "שלח" : 'המשך',
-                      style: titleFont.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            )),
-      );
-
   void _onContinueTap() {
     final phone = _phoneController.text;
     final sms = _smsController.text;
@@ -179,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool _smsValid(String sms) => sms == "123456";
+
   bool _phoneValid(String phone) => phone.length > 9;
 
   Widget _phone() {

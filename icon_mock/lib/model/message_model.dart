@@ -1,8 +1,17 @@
-class MessageModel {
-  final String message;
-  final String avatarUrl;
-  final String timeStamp;
+import 'package:icon_mock/model/user_model.dart';
 
-  MessageModel(this.message, this.avatarUrl, this.timeStamp);
+class Message {
+  final UserModel sender;
+  final String time; // Would usually be type DateTime or Firebase Timestamp in production apps
+  final String text;
+  final bool isLiked;
+  final bool unread;
 
+  Message({
+    this.sender,
+    this.time,
+    this.text,
+    this.isLiked,
+    this.unread,
+  });
 }

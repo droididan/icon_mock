@@ -8,24 +8,28 @@ class HebrewText extends StatelessWidget {
     this.textAlign,
     this.maxLines = 1,
     this.overflow,
+    this.padding = const EdgeInsets.all(0),
   }) : super(key: key);
   final int maxLines;
   final String text;
   final TextStyle style;
   final TextAlign textAlign;
   final TextOverflow overflow;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
         textDirection: TextDirection.rtl,
-        child: Text(
-          
-          text,
-          overflow: overflow,
-          textAlign: textAlign,
-          style: style,
-          maxLines: maxLines,
+        child: Padding(
+          padding: padding,
+          child: Text(
+            text,
+            overflow: overflow,
+            textAlign: textAlign,
+            style: style,
+            maxLines: maxLines,
+          ),
         ));
   }
 }
