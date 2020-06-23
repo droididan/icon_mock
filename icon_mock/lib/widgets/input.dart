@@ -36,8 +36,6 @@ class ShadowInputBox extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.grey[200]))),
               child: Padding(
                 padding: EdgeInsets.only(left: 10),
                 child: TextField(

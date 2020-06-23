@@ -32,11 +32,9 @@ class _RecentChatsPageState extends State<RecentChatsPage> {
           children: <Widget>[
             RecentChatsAppBar(),
             StoriesWidget(),
+            SizedBox(height: 5),
             Divider(color: divider, thickness: 1),
-            Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: HebrewText('קטגוריות',
-                    style: titleFont.copyWith(color: white))),
+            _title(),
             RecentChatList()
           ],
         ),
@@ -57,5 +55,11 @@ class _RecentChatsPageState extends State<RecentChatsPage> {
         )
       ]),
     );
+  }
+
+  Widget _title() {
+    return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: HebrewText('קטגוריות', style: titleFont.copyWith(color: white)));
   }
 }

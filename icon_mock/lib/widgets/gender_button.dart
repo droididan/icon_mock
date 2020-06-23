@@ -5,13 +5,13 @@ import 'hebrew_input_text.dart';
 
 class GenderButton extends StatelessWidget {
   final bool isSelected;
-  final String asset;
+  final Icon icon;
   final Function onTap;
   final String title;
   const GenderButton({
     Key key,
     @required this.isSelected,
-    @required this.asset,
+    @required this.icon,
     @required this.onTap,
     @required this.title,
   }) : super(key: key);
@@ -29,16 +29,13 @@ class GenderButton extends StatelessWidget {
           width: 100,
           decoration:
               fieldShadow.copyWith(color: isSelected ? gold : brightGold),
-          child: Stack(children: [
-            Center(child: Icon(Icons.ac_unit)),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: HebrewText(
-                title,
-                padding: EdgeInsets.only(bottom: 8),
-                style: smallFont.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.bold),
-              ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            icon,
+            SizedBox(height: 6),
+            HebrewText(
+              title,
+              style: smallFont.copyWith(
+                  color: Colors.black, fontWeight: FontWeight.bold),
             )
           ]),
         ),

@@ -34,7 +34,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: greyDark,
       body: FocusAwareWidget(
         child: Stack(children: [
           ListView(
@@ -135,12 +135,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
           GenderButton(
               title: 'זכר',
               isSelected: currentGender == Gender.male,
-              asset: '',
+              icon: Icon(
+                FontAwesomeIcons.male,
+                size: 40,
+              ),
               onTap: () => setState(() => currentGender = Gender.male)),
           GenderButton(
               title: 'נקבה',
               isSelected: currentGender == Gender.female,
-              asset: '',
+              icon: Icon(
+                FontAwesomeIcons.female,
+                size: 40,
+              ),
               onTap: () => setState(() => currentGender = Gender.female))
         ],
       ),
