@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,7 +8,6 @@ import 'package:icon_mock/chat/recent_chats_page.dart';
 import 'package:icon_mock/model/user_model.dart';
 import 'package:icon_mock/theme.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:icon_mock/widgets/big_button.dart';
 import 'package:icon_mock/widgets/focus_aware.dart';
 import 'package:icon_mock/widgets/gender_button.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
@@ -25,28 +25,77 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final picker = ImagePicker();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
-
   Gender currentGender = Gender.male;
-
   File _image;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: greyDark,
+      backgroundColor: greyLight,
       body: FocusAwareWidget(
-        child: Stack(children: [
-          ListView(
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            _buildPageTitle(context),
+            _buildUserDetails(context),
+            _buildAvatar(context),
+            _buildNextButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNextButton() {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: FloatingActionButton(
+          heroTag: 'next',
+          backgroundColor: brightGold,
+          onPressed: () => _onContinueTap(),
+          child: Icon(
+            FontAwesomeIcons.arrowLeft,
+            color: black,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAvatar(BuildContext context) {
+    return Positioned(
+      top: context.heightPx * .16,
+      child: Container(
+        height: context.heightPx * .33,
+        width: context.widthPx * .91,
+        child: Column(children: [
+          SizedBox(height: 16),
+          _avatar(),
+          SizedBox(height: 16),
+          _buildFirstName(),
+          SizedBox(height: 16),
+          _buildLastName(),
+        ]),
+        decoration: BoxDecoration(
+          color: greyLight,
+          boxShadow: [containerShadow],
+          borderRadius: BorderRadius.circular(30),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUserDetails(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: context.heightPx * .48,
+        child: Align(
+          child: Column(
             children: <Widget>[
-              SizedBox(height: context.widthPx * .1),
-              Container(height: 100, width: 100, child: _buidUserPhoto()),
-              SizedBox(height: context.widthPx * .05),
-              _buildFirstName(),
-              _buildLastName(),
-              SizedBox(height: context.widthPx * .05),
               _buildGender(),
               SizedBox(height: context.widthPx * .05),
               _buildAge(),
@@ -54,19 +103,33 @@ class _OnboardingPageState extends State<OnboardingPage> {
               _buildCelebToggle(),
             ],
           ),
-          _continueButton(),
-        ]),
+        ),
       ),
     );
   }
 
-  Widget _buidUserPhoto() {
+  Widget _buildPageTitle(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+            child: Column(children: [
+              SizedBox(height: 30),
+              HebrewText('פרופיל', style: titleFont)
+            ]),
+            padding: EdgeInsets.only(top: 40),
+            alignment: Alignment.center,
+            height: context.heightPx * .35,
+            color: greyDark),
+      ],
+    );
+  }
+
+  Widget _avatar() {
     return FadeAnimation(
       1.0,
       GestureDetector(
         onTap: () async {
           final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
           setState(() {
             _image = File(pickedFile.path);
           });
@@ -75,25 +138,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
           child: Container(
             height: 100,
             width: 100,
-            decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-              BoxShadow(
-                color: brightGold,
-                blurRadius: 5.0,
-                spreadRadius: 2.0,
-              ),
-            ]),
-            child: Container(
-              height: 95,
-              width: 95,
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-              child: _image == null
-                  ? Icon(Icons.camera_alt, size: 40, color: Colors.black)
-                  : CircleAvatar(
-                      backgroundColor: brightGold,
-                      backgroundImage: FileImage(_image),
-                    ),
-            ),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: white,
+                boxShadow: [containerShadow]),
+            child: _image == null
+                ? Icon(Icons.person, size: 50, color: brightGold)
+                : CircleAvatar(
+                    backgroundColor: brightGold,
+                    backgroundImage: FileImage(_image),
+                  ),
           ),
         ),
       ),
@@ -101,34 +155,27 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   Widget _buildFirstName() {
-    return FadeAnimation(
-      1.2,
-      ShadowInputBox(
-          controller: firstNameController,
-          onChanged: (first) => userState.firstName = first,
-          padding: columnPadding,
-          hintText: 'שם פרטי',
-          width: context.widthPx * .8,
-          maxLines: 1),
-    );
+    return ShadowInputBox(
+        controller: firstNameController,
+        onChanged: (first) => userState.firstName = first,
+        hintText: 'שם פרטי',
+        width: context.widthPx * .8,
+        maxLines: 1);
   }
 
   Widget _buildLastName() {
-    return FadeAnimation(
-      1.3,
-      ShadowInputBox(
-        controller: lastNameController,
-        onChanged: (last) => userState.lastName = last,
-        padding: columnPadding,
-        hintText: 'שם משפחה',
-        maxLines: 1,
-      ),
+    return ShadowInputBox(
+      controller: lastNameController,
+      onChanged: (last) => userState.lastName = last,
+      hintText: 'שם משפחה',
+      width: context.widthPx * .8,
+      maxLines: 1,
     );
   }
 
   Widget _buildGender() {
     return FadeAnimation(
-      1.4,
+      1.2,
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -137,7 +184,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               isSelected: currentGender == Gender.male,
               icon: Icon(
                 FontAwesomeIcons.male,
-                size: 40,
+                size: 30,
               ),
               onTap: () => setState(() => currentGender = Gender.male)),
           GenderButton(
@@ -145,7 +192,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               isSelected: currentGender == Gender.female,
               icon: Icon(
                 FontAwesomeIcons.female,
-                size: 40,
+                size: 30,
               ),
               onTap: () => setState(() => currentGender = Gender.female))
         ],
@@ -155,12 +202,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _buildAge() {
     return FadeAnimation(
-      1.5,
+      1.3,
       Column(
         children: <Widget>[
           HebrewText(
-            'גיל',
-            style: mediumFont,
+            'בחירת גיל',
+            style: mediumFont.copyWith(color: white),
           ),
           MaterialButton(
               onPressed: () {
@@ -176,7 +223,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
               },
               child: Text(
                 userState?.age?.toString() ?? '20',
-                style: hugeFont,
+                style: hugeFont.copyWith(
+                  color: brightGold,
+                ),
               )),
         ],
       ),
@@ -185,22 +234,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _buildCelebToggle() {
     return FadeAnimation(
-      1.6,
+      1.4,
       Center(
         child: Column(
           children: <Widget>[
             HebrewText(
               'האת אתה סלב? ',
-              style: mediumFont,
+              style: mediumFont.copyWith(color: white),
             ),
             SizedBox(height: context.widthPx * .03),
             ToggleSwitch(
-                initialLabelIndex: 0,
+                initialLabelIndex: 1,
                 cornerRadius: 20,
                 activeBgColor: brightGold,
-                activeTextColor: Colors.white,
-                inactiveBgColor: Colors.grey,
-                inactiveTextColor: Colors.white,
+                activeTextColor: black,
+                inactiveBgColor: white,
+                inactiveTextColor: black,
                 labels: ['כן', 'לא'],
                 icons: [FontAwesomeIcons.check, FontAwesomeIcons.times],
                 onToggle: (index) {
@@ -212,24 +261,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  Widget _continueButton() {
-    return FadeAnimation(
-        2.0,
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: BigButton(
-                onTap: () {
-                  if (firstNameController.text.isNotEmpty &&
-                      lastNameController.text.isNotEmpty) {
-                    // continue to the chat
-                    Navigator.pop(context);
-                    Navigator.push(context,
-                        CupertinoPageRoute(builder: (_) => RecentChatsPage()));
-                  } else {
-                    context.showToast('שם פרטי ומשפחה חייבים להכיל פרטים');
-                  }
-                },
-                title: 'המשך')));
+  void _onContinueTap() {
+    if (firstNameController.text.isNotEmpty &&
+        lastNameController.text.isNotEmpty) {
+      // continue to the chat
+      Navigator.pop(context);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => RecentChatsPage()));
+    } else {
+      context.showToast('שם פרטי ומשפחה חייבים להכיל פרטים');
+    }
   }
 
   void _updateAge(DateTime date) {

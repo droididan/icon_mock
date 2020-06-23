@@ -33,7 +33,6 @@ class _RecentChatsPageState extends State<RecentChatsPage> {
             RecentChatsAppBar(),
             StoriesWidget(),
             SizedBox(height: 5),
-            Divider(color: divider, thickness: 1),
             _title(),
             RecentChatList()
           ],

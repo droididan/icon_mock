@@ -47,8 +47,10 @@ class _LoginPageState extends State<LoginPage> {
     await FlutterStatusbarcolor.setStatusBarColor(greyDark);
   }
 
-  void loaderVisibility(bool visible) =>
-      setState(() => loaderLocation = visible ? 50 : 200);
+  void loaderVisibility(bool visible) {
+    if (!mounted) return;
+    setState(() => loaderLocation = visible ? 50 : 200);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +87,12 @@ class _LoginPageState extends State<LoginPage> {
                   Positioned(
                     bottom: 0,
                     child: FloatingActionButton(
+                      heroTag: 'next',
                       backgroundColor: brightGold,
                       onPressed: () => _onContinueTap(),
                       child: Icon(
                         FontAwesomeIcons.arrowLeft,
+                        color: black,
                       ),
                     ),
                   ),
@@ -202,7 +206,6 @@ class _LoginPageState extends State<LoginPage> {
                     keyboardType: TextInputType.phone,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
-                      
                         suffixIcon:
                             Icon(FontAwesomeIcons.mobile, color: brightGold),
                         border: InputBorder.none,
@@ -308,9 +311,7 @@ class PrivacyAndTerms extends StatelessWidget {
               style: smallFont.copyWith(
                   color: white, decoration: TextDecoration.underline),
               recognizer: TapGestureRecognizer()..onTap = () async {}),
-              TextSpan(
-              text: ' ו',
-              style: smallFont.copyWith(color: Colors.grey)),
+          TextSpan(text: ' ו', style: smallFont.copyWith(color: Colors.grey)),
           TextSpan(
               text: 'מדיניות הפרטיות',
               style: smallFont.copyWith(

@@ -7,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 const gold = Color(0xFFD59A4F);
 const brightGold = Color(0xFFE0C198);
 const black = Color(0xFF070707);
-const greyLight = Color(0xFF222329);
-const greyDark = Color(0xFF151618);
+const greyLight = Color(0xFF303540);
+const greyDark = Color(0xFF2B2E36);
 const greyCompose = Color(0xFF1F2129);
 const white = Color(0xFFF6F7F7);
 const subTextGrey = Color(0xFFD4D4D6);
@@ -28,22 +28,22 @@ final mediumFont = GoogleFonts.roboto(
 );
 
 final titleFont = GoogleFonts.roboto(
-  textStyle: TextStyle(color: Colors.black, letterSpacing: .5, fontSize: 18),
+  textStyle: TextStyle(color: white, letterSpacing: .5, fontSize: 22),
 );
 
 final hugeFont = GoogleFonts.roboto(
   textStyle: TextStyle(color: Colors.black, letterSpacing: .5, fontSize: 30),
 );
 
+
 // Decorations
 final fieldShadow = BoxDecoration(
-    borderRadius: BorderRadius.circular(30),
-    color: Colors.white,
-     
-    );
+  borderRadius: BorderRadius.circular(30),
+  color: Colors.white,
+);
 
 final containerShadow = BoxShadow(
-  color: black.withOpacity(.5),
+  color: black.withOpacity(.3),
   blurRadius: 20,
   offset: Offset(0, 7),
 );

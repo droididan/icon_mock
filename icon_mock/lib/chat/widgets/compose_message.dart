@@ -9,12 +9,13 @@ class ComposeMessage extends StatelessWidget {
     return Container(
       height: 50,
       child: FloatingActionButton(
-          backgroundColor: greyDark,
-          onPressed: () {},
-          child: Icon(
-            Icons.send,
-            color: brightGold,
-          )),
+        backgroundColor: greyDark,
+        onPressed: () {},
+        child: Icon(
+          Icons.send,
+          color: brightGold,
+        ),
+      ),
     );
   }
 

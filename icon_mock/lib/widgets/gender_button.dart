@@ -21,14 +21,16 @@ class GenderButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        highlightColor: isSelected ? gold : brightGold,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onTap: onTap,
         child: AnimatedContainer(
           duration: Duration(milliseconds: 450),
-          height: 100,
-          width: 100,
-          decoration:
-              fieldShadow.copyWith(color: isSelected ? gold : brightGold),
+          height: 70,
+          width: 70,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              color: isSelected ? brightGold : white),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             icon,
             SizedBox(height: 6),

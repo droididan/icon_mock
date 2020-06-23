@@ -20,7 +20,7 @@ class ShadowInputBox extends StatelessWidget {
     this.maxLength,
     this.hintText,
     this.width,
-    this.height,
+    this.height = 48,
     this.icon,
     this.padding = const EdgeInsets.all(0),
     this.onChanged,
@@ -31,29 +31,26 @@ class ShadowInputBox extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Container(
+        width: width,
+        height: height,
         decoration: fieldShadow,
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(10),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: TextField(
-                  onChanged: onChanged,
-                  autofocus: false,
-                  style: GoogleFonts.lato(),
-                  controller: controller,
-                  maxLines: maxLines,
-                  maxLength: maxLength,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(right: 25),
-                      icon: icon,
-                      border: InputBorder.none,
-                      counterText: '',
-                      hintText: hintText,
-                      hintStyle: TextStyle(color: Colors.grey)),
-                ),
+              child: TextField(
+                onChanged: onChanged,
+                autofocus: false,
+                style: GoogleFonts.lato(),
+                controller: controller,
+                maxLines: maxLines,
+                maxLength: maxLength,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    icon: icon,
+                    border: InputBorder.none,
+                    counterText: '',
+                    hintText: hintText,
+                    hintStyle: TextStyle(color: Colors.grey)),
               ),
             ),
           ],
