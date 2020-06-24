@@ -16,6 +16,16 @@ List<Message> chats = [
   Message(
     sender: bar,
     time: '5:30 PM',
+    type: MessageType.tag,
+    isLiked: false,
+    tag: 'לנדוור',
+    photo:  'https://images.haarets.co.il/image/fetch/w_2556,h_1564,c_crop/q_auto,h_874,w_1429,c_fill,f_auto/fl_lossy.any_format.preserve_transparency.progressive:none/https://www.haaretz.co.il/polopoly_fs/1.2157573!/image/2936280772.jpg',
+    likes: 43,
+    unread: true,
+  ),
+  Message(
+    sender: bar,
+    time: '5:30 PM',
     text: 'היי מה קורה?',
     isLiked: false,
     likes: 43,
@@ -34,7 +44,6 @@ List<Message> chats = [
     time: '12:30 PM',
     text: 'סגור, מתי זורם לך?',
     isLiked: false,
-    
     unread: false,
   ),
   Message(

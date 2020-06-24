@@ -51,7 +51,7 @@ class ChatList extends StatelessWidget {
               return ChatMessage(message: message);
             case MessageType.tag:
             case MessageType.photo:
-              return ChatImage(imageUrl: message.photo);
+              return ChatImage(message: message);
           }
           return Container();
         },

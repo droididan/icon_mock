@@ -9,8 +9,9 @@ class Message {
   final bool unread;
   final int likes;
   final String photo;
-
+  final String tag;
   Message({
+    this.tag,
     this.type = MessageType.text,
     this.photo,
     this.likes,

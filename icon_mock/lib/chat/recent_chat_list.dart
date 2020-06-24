@@ -22,12 +22,11 @@ class RecentChatList extends StatelessWidget {
       itemBuilder: (_, i) {
         final category = categories[i];
         return OpenContainer(
-          closedColor: greyDark,
-          transitionType: ContainerTransitionType.fade,
-          closedBuilder: (_, action) =>
-              CategoryItem(category: category, action: action),
-          openBuilder: (_, action) => ChatPage(category: category),
-        );
+            closedColor: greyDark,
+            transitionType: ContainerTransitionType.fade,
+            closedBuilder: (_, action) =>
+                CategoryItem(category: category, action: action),
+            openBuilder: (_, action) => ChatPage(category: category));
       },
     );
   }
