@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icon_mock/animations/fade_animation.dart';
 import 'package:icon_mock/chat/recent_chats_page.dart';
@@ -13,7 +14,6 @@ import 'package:icon_mock/widgets/hebrew_input_text.dart';
 import 'package:icon_mock/widgets/input.dart';
 import 'package:icon_mock/extensions/size_ext.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class OnboardingPage extends StatefulWidget {
   @override
@@ -66,9 +66,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _buildAvatar(BuildContext context) {
     return Positioned(
-      top: context.heightPx * .16,
+      top: context.heightPx * .12,
       child: Container(
-        height: context.heightPx * .33,
+        height: context.heightPx * .36,
         width: context.widthPx * .91,
         child: Column(children: [
           SizedBox(height: 16),
@@ -99,7 +99,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               SizedBox(height: context.widthPx * .05),
               _buildAge(),
               SizedBox(height: context.widthPx * .05),
-              _buildCelebToggle(),
+              // _buildCelebToggle(),
             ],
           ),
         ),
@@ -112,7 +112,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       children: <Widget>[
         Container(
             child: Column(children: [
-              SizedBox(height: 30),
+              SizedBox(height: context.heightPx * .01),
               HebrewText('פרופיל', style: titleFont)
             ]),
             padding: EdgeInsets.only(top: 40),
@@ -175,25 +175,34 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget _buildGender() {
     return FadeAnimation(
       1.2,
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      Column(
         children: <Widget>[
-          GenderButton(
-              title: 'זכר',
-              isSelected: currentGender == Gender.male,
-              icon: Icon(
-                FontAwesomeIcons.male,
-                size: 30,
-              ),
-              onTap: () => setState(() => currentGender = Gender.male)),
-          GenderButton(
-              title: 'נקבה',
-              isSelected: currentGender == Gender.female,
-              icon: Icon(
-                FontAwesomeIcons.female,
-                size: 30,
-              ),
-              onTap: () => setState(() => currentGender = Gender.female))
+          HebrewText(
+            'האם אתה?',
+            style: mediumFont.copyWith(color: white),
+          ),
+          SizedBox(height: 5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GenderButton(
+                  title: 'זכר',
+                  isSelected: currentGender == Gender.male,
+                  icon: Icon(
+                    Ionicons.ios_male,
+                    size: 30,
+                  ),
+                  onTap: () => setState(() => currentGender = Gender.male)),
+              GenderButton(
+                  title: 'נקבה',
+                  isSelected: currentGender == Gender.female,
+                  icon: Icon(
+                    Ionicons.ios_female,
+                    size: 30,
+                  ),
+                  onTap: () => setState(() => currentGender = Gender.female))
+            ],
+          ),
         ],
       ),
     );
@@ -227,35 +236,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ),
               )),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCelebToggle() {
-    return FadeAnimation(
-      1.4,
-      Center(
-        child: Column(
-          children: <Widget>[
-            HebrewText(
-              'האת אתה סלב? ',
-              style: mediumFont.copyWith(color: white),
-            ),
-            SizedBox(height: context.widthPx * .03),
-            ToggleSwitch(
-                initialLabelIndex: 1,
-                cornerRadius: 20,
-                activeBgColor: brightGold,
-                activeTextColor: black,
-                inactiveBgColor: white,
-                inactiveTextColor: black,
-                labels: ['כן', 'לא'],
-                icons: [FontAwesomeIcons.check, FontAwesomeIcons.times],
-                onToggle: (index) {
-                  print('switched to: $index');
-                }),
-          ],
-        ),
       ),
     );
   }

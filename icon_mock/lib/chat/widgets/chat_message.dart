@@ -43,7 +43,7 @@ class ChatMessage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          HebrewText(message.sender.firstName,
+                          HebrewText(message.sender.fullName,
                               style: smallFont.copyWith(
                                 color: black,
                                 fontWeight: FontWeight.bold,
@@ -60,19 +60,16 @@ class ChatMessage extends StatelessWidget {
                   // ),
                 ],
               ),
-              // if (message.likes != null && message.likes > 0)
-              //   Padding(
-              //     padding: const EdgeInsets.only(right: 67.0),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.end,
-              //       children: <Widget>[
-              //         HebrewText(message.likes.toString(),
-              //             style: smallFont.copyWith(color: Colors.red)),
-              //         SizedBox(width: 2),
-              //         Icon(FontAwesomeIcons.heart, color: Colors.red, size: 16),
-              //       ],
-              //     ),
-              //   ),
+              if (message.likes != null && message.likes > 0)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    HebrewText('${message.likes.toString()} לייק',
+                        style: smallFont.copyWith(color: Colors.red)),
+                    SizedBox(width: 2),
+                    Icon(FontAwesomeIcons.heart, color: Colors.red, size: 16),
+                  ],
+                ),
             ],
           ),
         ));

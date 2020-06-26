@@ -33,13 +33,13 @@ class _LoginPageState extends State<LoginPage> {
   final _smsController = TextEditingController();
   LoginState state = LoginState.phone;
   double loaderLocation = 200.0;
-  bool hideHeader = false;
+  bool loading = false;
 
   @override
   void initState() {
     setStatusColor();
     KeyboardVisibilityNotification().addNewListener(
-        onChange: (bool visible) => setState(() => hideHeader = visible));
+        onChange: (bool visible) => setState(() => loading = visible));
     super.initState();
   }
 
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
     await FlutterStatusbarcolor.setStatusBarColor(greyDark);
   }
 
-  void loaderVisibility(bool visible) {
+  void loaderPosition(bool visible) {
     if (!mounted) return;
     setState(() => loaderLocation = visible ? 50 : 200);
   }
@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius:
                         BorderRadius.only(topLeft: radius, bottomLeft: radius),
                     color: greyLight),
-                height: context.heightPx * .6,
+                height: context.heightPx * .64,
                 width: context.widthPx * .94,
                 child: Stack(children: [
                   Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -99,27 +99,32 @@ class _LoginPageState extends State<LoginPage> {
                 ]),
               ),
             ),
-            if (!hideHeader)
+            if (!loading)
               Align(
-                  alignment: Alignment.bottomCenter, child: PrivacyAndTerms()),
+                alignment: Alignment.bottomCenter,
+                child: PrivacyAndTerms(),
+              ),
           ]),
         ),
       ),
     );
   }
 
-  AnimatedPositioned _buildProgressBar(BuildContext context) {
-    return AnimatedPositioned(
-      duration: Duration(milliseconds: 550),
-      bottom: loaderLocation,
-      left: 0,
-      child: Container(
-          height: context.heightPx * .42,
-          child: Lottie.asset('assets/animations/login_background.json')),
+  Widget _buildProgressBar(BuildContext context) {
+    return Visibility(
+      visible: !loading,
+      child: AnimatedPositioned(
+        duration: Duration(milliseconds: 550),
+        bottom: loaderLocation,
+        left: 0,
+        child: Container(
+            height: context.heightPx * .42,
+            child: Lottie.asset('assets/animations/login_background.json')),
+      ),
     );
   }
 
-  Padding _buildIconTitle() {
+  Widget _buildIconTitle() {
     return Padding(
       padding: const EdgeInsets.all(42.0),
       child: Text(
@@ -161,9 +166,9 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           state = LoginState.sms;
           opacity = 1.0;
-          loaderVisibility(true);
+          loaderPosition(true);
 
-          Future.delayed(Duration(seconds: 4), () => loaderVisibility(false));
+          Future.delayed(Duration(seconds: 4), () => loaderPosition(false));
         });
       } else {
         // show phone number is invalid
@@ -190,30 +195,25 @@ class _LoginPageState extends State<LoginPage> {
     return FadeAnimation(
         1.8,
         Container(
+          height: 48,
           decoration: fieldShadow,
           child: Column(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: TextField(
-                    autofocus: false,
-                    style: mediumFont.copyWith(fontSize: 18),
-                    controller: _phoneController,
-                    maxLines: 1,
-                    maxLength: 11,
-                    keyboardType: TextInputType.phone,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        suffixIcon:
-                            Icon(FontAwesomeIcons.mobile, color: brightGold),
-                        border: InputBorder.none,
-                        counterText: '',
-                        hintText: "054-5554433",
-                        hintStyle: TextStyle(color: greyLight.withOpacity(.5))),
-                  ),
-                ),
+              TextField(
+                autofocus: false,
+                style: mediumFont.copyWith(fontSize: 18),
+                controller: _phoneController,
+                maxLines: 1,
+                maxLength: 11,
+                keyboardType: TextInputType.phone,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    suffixIcon:
+                        Icon(FontAwesomeIcons.mobile, color: brightGold),
+                    border: InputBorder.none,
+                    counterText: '',
+                    hintText: "054-5554433",
+                    hintStyle: TextStyle(color: greyLight.withOpacity(.5))),
               ),
             ],
           ),
@@ -229,31 +229,26 @@ class _LoginPageState extends State<LoginPage> {
               _smsTitle(),
               smallSpacing,
               Container(
+                height: 48,
                 decoration: fieldShadow,
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: TextField(
-                            style: mediumFont.copyWith(fontSize: 20),
-                            autofocus: false,
-                            maxLines: 1,
-                            controller: _smsController,
-                            maxLength: 6,
-                            keyboardType: TextInputType.phone,
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                                suffixIcon: Icon(FontAwesomeIcons.sms,
-                                    color: brightGold),
-                                border: InputBorder.none,
-                                counterText: '',
-                                hintText: "112233",
-                                hintStyle: TextStyle(
-                                    color: greyLight.withOpacity(.5)))),
-                      ),
-                    ),
+                    TextField(
+                        style: mediumFont.copyWith(fontSize: 20),
+                        autofocus: false,
+                        maxLines: 1,
+                        controller: _smsController,
+                        maxLength: 6,
+                        keyboardType: TextInputType.phone,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                            suffixIcon:
+                                Icon(FontAwesomeIcons.sms, color: brightGold),
+                            border: InputBorder.none,
+                            counterText: '',
+                            hintText: "112233",
+                            hintStyle:
+                                TextStyle(color: greyLight.withOpacity(.5)))),
                   ],
                 ),
               ),
@@ -302,6 +297,7 @@ class PrivacyAndTerms extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: RichText(
+        textAlign: TextAlign.center,
         text: TextSpan(children: [
           TextSpan(
               text: 'בכניסה למערכת אישרת את ',

@@ -23,4 +23,4 @@ class Message {
   });
 }
 
-enum MessageType { text, tag, photo }
+enum MessageType { text, tag, photo, system }

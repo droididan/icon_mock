@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:icon_mock/extensions/size_ext.dart';
+import 'package:icon_mock/search/category_model.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
 import 'package:icon_mock/widgets/stories_widget.dart';
 import '../../theme.dart';
-import '../recent_chat_list.dart';
 
 class ChatAppBar extends StatelessWidget {
-  final Category category;
+  final CategoryModel category;
 
   const ChatAppBar({Key key, @required this.category}) : super(key: key);
 
@@ -37,7 +37,7 @@ class ChatAppBar extends StatelessWidget {
                           category.title,
                           style: titleFont.copyWith(color: Colors.white),
                         ),
-                        HebrewText('32 סלבס אונליין',
+                        HebrewText('130,000 מחוברים, 11,000 אונליין',
                             style: smallFont.copyWith(color: brightGold)),
                       ],
                     ),

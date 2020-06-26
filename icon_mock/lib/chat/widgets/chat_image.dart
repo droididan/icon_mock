@@ -11,7 +11,7 @@ class ChatImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal:16),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -32,11 +32,12 @@ class ChatImage extends StatelessWidget {
                 height: 200.0,
                 fit: BoxFit.cover),
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            clipBehavior: Clip.hardEdge,
+            clipBehavior: Clip.antiAlias
           ),
           SizedBox(height: 5),
           HebrewText(
             '#${message.tag}',
+            maxLines: 2,
             style: mediumFont.copyWith(color: white),
           ),
         ],

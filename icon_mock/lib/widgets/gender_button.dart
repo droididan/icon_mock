@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../theme.dart';
 import 'hebrew_input_text.dart';
 
@@ -26,20 +25,23 @@ class GenderButton extends StatelessWidget {
         onTap: onTap,
         child: AnimatedContainer(
           duration: Duration(milliseconds: 450),
-          height: 70,
-          width: 70,
+          height: 90,
+          width: 90,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
               color: isSelected ? brightGold : white),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            icon,
-            SizedBox(height: 6),
-            HebrewText(
-              title,
-              style: smallFont.copyWith(
-                  color: Colors.black, fontWeight: FontWeight.bold),
-            )
-          ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon,
+              SizedBox(height: 6),
+              HebrewText(
+                title,
+                style: smallFont.copyWith(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
         ),
       ),
     );

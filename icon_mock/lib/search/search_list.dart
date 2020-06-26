@@ -1,16 +1,13 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icon_mock/chat/chat_page.dart';
 import 'package:icon_mock/theme.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
-import 'package:animations/animations.dart';
 
-import 'chat_page.dart';
+import 'category_model.dart';
 
-class RecentChatList extends StatelessWidget {
-  const RecentChatList({
-    Key key,
-  }) : super(key: key);
-
+class SearchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -39,7 +36,7 @@ class CategoryItem extends StatelessWidget {
     this.action,
   }) : super(key: key);
 
-  final Category category;
+  final CategoryModel category;
   final VoidCallback action;
 
   @override
@@ -47,6 +44,9 @@ class CategoryItem extends StatelessWidget {
     return InkWell(
       onTap: action,
       child: Card(
+          shape: RoundedRectangleBorder(
+              side: BorderSide(width: .3, color: brightGold),
+              borderRadius: BorderRadius.circular(16)),
           elevation: 2,
           shadowColor: greyLight,
           color: greyLight,
@@ -55,30 +55,23 @@ class CategoryItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                Icon(category.icon, color: Colors.white, size: 40),
+                Icon(category.icon, color: Colors.white, size: 32),
                 SizedBox(height: 16),
                 HebrewText(category.title,
                     style: mediumFont.copyWith(color: white))
               ])),
-          margin: EdgeInsets.all(4)),
+          margin: EdgeInsets.all(6)),
     );
   }
 }
 
-class Category {
-  final IconData icon;
-  final String title;
-
-  Category(this.icon, this.title);
-}
-
 final categories = [
-  Category(FontAwesomeIcons.baseballBall, 'כתבי ספורט'),
-  Category(FontAwesomeIcons.microphone, 'זמרים מזרחיים'),
-  Category(FontAwesomeIcons.tv, 'בידור'),
-  Category(FontAwesomeIcons.car, 'רכבים'),
-  Category(FontAwesomeIcons.carCrash, 'כתבי ספורט'),
-  Category(FontAwesomeIcons.caretSquareUp, 'זמרים מזרחיים'),
-  Category(FontAwesomeIcons.cat, 'בידור'),
-  Category(FontAwesomeIcons.chevronLeft, 'רכבים'),
+  CategoryModel(icon: FontAwesomeIcons.tv, title: 'בידור'),
+  CategoryModel(icon: FontAwesomeIcons.microphone, title: 'שפים'),
+  CategoryModel(icon: FontAwesomeIcons.footballBall, title: 'כתבי ספורט'),
+  CategoryModel(icon: FontAwesomeIcons.camera, title: 'האח הגדול'),
+  CategoryModel(icon: FontAwesomeIcons.star, title: 'הכוכב הבא'),
+  CategoryModel(icon: FontAwesomeIcons.microphoneAlt, title: 'זמרים מזרחיים'),
+  CategoryModel(icon: FontAwesomeIcons.sun, title: 'הישרדות'),
+  CategoryModel(icon: FontAwesomeIcons.car, title: 'רכבים'),
 ];
