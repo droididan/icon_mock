@@ -87,7 +87,6 @@ class FocusedMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FocusedMenuHolder(
-      menuWidth: MediaQuery.of(context).size.width * 0.2,
       blurSize: 5.0,
       menuItemExtent: 45,
       menuBoxDecoration: BoxDecoration(

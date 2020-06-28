@@ -1,23 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:icon_mock/model/chat_model.dart';
+import 'package:icon_mock/model/message_model.dart';
+import 'package:icon_mock/model/user_model.dart';
 import 'package:icon_mock/widgets/focused_menu.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
-import 'package:icon_mock/extensions/size_ext.dart';
+import 'package:icon_mock/extensions/context_ext.dart';
 import '../../theme.dart';
 
-class ComposeMessage extends StatelessWidget {
+class ComposeMessage extends StatefulWidget {
+  @override
+  _ComposeMessageState createState() => _ComposeMessageState();
+}
+
+class _ComposeMessageState extends State<ComposeMessage> {
+  final controller = TextEditingController();
+
   Widget _sendButton(BuildContext context) {
     return Container(
-      height: context.heightPx * .048,
-      width: context.heightPx * .048,
+      height: context.heightPx * .052,
+      width: context.heightPx * .052,
       child: FloatingActionButton(
-        backgroundColor: greyDark,
-        onPressed: () {},
-        child: Icon(
-          Icons.send,
-          color: brightGold,
-          size: context.heightPx * .028
-        ),
-      ),
+          backgroundColor: greyDark,
+          onPressed: () {
+            final text = controller.text;
+
+            if (text.isNotEmpty) {
+              setState(() {
+                final message = Message(
+                  sender: userState,
+                  text: text,
+                );
+
+                chats.add(message);
+
+                controller.clear();
+              });
+            }
+          },
+          child: Icon(Icons.send,
+              color: brightGold, size: context.heightPx * .028)),
     );
   }
 
@@ -61,7 +82,7 @@ class ComposeMessage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: TextField(
-                  // enabled: false,
+                  controller: controller,
                   maxLines: null,
                   style: mediumFont.copyWith(color: white),
                   decoration: InputDecoration.collapsed(
@@ -75,20 +96,17 @@ class ComposeMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.only(left: 4),
-        height: context.heightPx * .06,
-        decoration: BoxDecoration(
-            color: greyCompose, borderRadius: BorderRadius.circular(35)),
-        margin: EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: <Widget>[
-            _sendButton(context),
-            _attachment(context),
-            _buildComposeInput(),
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.only(left: 4),
+      decoration: BoxDecoration(
+          color: greyCompose, borderRadius: BorderRadius.circular(35)),
+      margin: EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: <Widget>[
+          _sendButton(context),
+          _attachment(context),
+          _buildComposeInput(),
+        ],
       ),
     );
   }

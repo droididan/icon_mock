@@ -12,7 +12,7 @@ import 'package:icon_mock/widgets/focus_aware.dart';
 import 'package:icon_mock/widgets/gender_button.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
 import 'package:icon_mock/widgets/input.dart';
-import 'package:icon_mock/extensions/size_ext.dart';
+import 'package:icon_mock/extensions/context_ext.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -68,7 +68,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return Positioned(
       top: context.heightPx * .12,
       child: Container(
-        height: context.heightPx * .36,
+        padding: EdgeInsets.only(bottom: 20),
+        // height: context.heightPx * .36,
         width: context.widthPx * .91,
         child: Column(children: [
           SizedBox(height: 16),

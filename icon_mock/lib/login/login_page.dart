@@ -10,7 +10,7 @@ import 'package:icon_mock/theme.dart';
 
 import 'package:icon_mock/widgets/focus_aware.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
-import 'package:icon_mock/extensions/size_ext.dart';
+import 'package:icon_mock/extensions/context_ext.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:lottie/lottie.dart';
 
@@ -57,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
     final padding = EdgeInsets.symmetric(horizontal: 42, vertical: 42);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         backgroundColor: greyDark,
         body: FocusAwareWidget(
           child: Stack(children: [
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius:
                         BorderRadius.only(topLeft: radius, bottomLeft: radius),
                     color: greyLight),
-                height: context.heightPx * .64,
+                height: context.heightPx * .68,
                 width: context.widthPx * .94,
                 child: Stack(children: [
                   Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
       padding: const EdgeInsets.all(42.0),
       child: Text(
         'ICON',
-        style: hugeFont.copyWith(fontSize: 60, color: brightGold),
+        style: hugeFont.copyWith(fontSize: 40, color: brightGold),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme.dart';
-import 'hebrew_input_text.dart';
+
 
 class GenderButton extends StatelessWidget {
   final bool isSelected;
@@ -35,11 +35,11 @@ class GenderButton extends StatelessWidget {
             children: [
               icon,
               SizedBox(height: 6),
-              HebrewText(
-                title,
-                style: smallFont.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.bold),
-              )
+              // HebrewText(
+              //   title,
+              //   style: smallFont.copyWith(
+              //       color: Colors.black, fontWeight: FontWeight.bold),
+              // )
             ],
           ),
         ),

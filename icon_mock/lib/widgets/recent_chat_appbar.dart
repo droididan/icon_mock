@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:icon_mock/extensions/size_ext.dart';
+import 'package:icon_mock/extensions/context_ext.dart';
 import 'package:icon_mock/search/search_page.dart';
 import '../theme.dart';
 import 'hebrew_input_text.dart';

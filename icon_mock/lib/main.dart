@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'chat/recent_chats_page.dart';
 import 'login/login_page.dart';
 
 void main() {
@@ -15,14 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
       title: 'Icon',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      // home: LoginPage(),
-      home: RecentChatsPage(),
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity),
+      home: LoginPage(),
     );
   }
 }

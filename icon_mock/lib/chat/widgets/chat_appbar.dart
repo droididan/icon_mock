@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icon_mock/extensions/size_ext.dart';
+import 'package:icon_mock/extensions/context_ext.dart';
 import 'package:icon_mock/search/category_model.dart';
 import 'package:icon_mock/widgets/hebrew_input_text.dart';
 import 'package:icon_mock/widgets/stories_widget.dart';

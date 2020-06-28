@@ -34,6 +34,7 @@ class _RecentChatsPageState extends State<RecentChatsPage> {
       backgroundColor: greyDark,
       body: Stack(children: [
         ListView(
+          physics: BouncingScrollPhysics(),
           children: <Widget>[
             RecentChatsAppBar(),
             StoriesWidget(),
